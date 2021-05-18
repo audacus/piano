@@ -1,2 +1,2 @@
 #!/bin/bash
-grip README.md --export index.html
+grip README.md --export doc/index.html

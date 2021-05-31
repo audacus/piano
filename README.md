@@ -23,7 +23,7 @@ Im Moodle konnte ich auch den Abgabe-Termin für den ersten Meilenstein _a) Zeit
 Zuerst setzte ich die Meilensteine in einem Abstand von einer Woche, von Dienstag zu Dienstag auf den Zeitstrahl. Danach verschob ich den Meilenstein _d) Listen, Schleifen, bedingte Ausführung_ eine Woche nach hinten. Nach meinem Verständnis wird beim Meilenstein _d)_ die Logik der Applikation umgesetzt, was voraussichtlich am meisten Zeit der Implementation in Anspruch nehmen wird.
 Nun liegen auch zwischen dem Meilenstein _e) JavaFX_ und dem letzten Meilenstein _f) Abgabe_ zwei Wochen. Diese zwei Wochen werden für den Abschluss des Projektes benötigt und dienen auch als Reserve. Da am Schluss oft noch an Details gearbeitet wird, erachte ich es auch hier als sinnvoll mehr Zeit einzuplanen.
 
-![Gantt Diagramm](piano-gantt.png)
+![Gantt Diagramm](gantt/piano-gantt.png)
 
 ### 1. Ziele
 * Gantt-Diagram mit Meilensteinen

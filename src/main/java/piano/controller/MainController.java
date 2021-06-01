@@ -10,6 +10,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -35,69 +36,125 @@ public class MainController extends AbstractController {
     @FXML
     private FlowPane flowPaneTone;
     @FXML
+    private Button buttonCancel;
+    @FXML
+    private Button buttonDelete;
+    @FXML
+    private Button buttonNew;
+    @FXML
+    private Button buttonSave;
+    @FXML
     private ComboBox<Note> comboBoxNote;
     @FXML
     private Label valueFrequency;
     @FXML
-    private Slider sliderVelocity;
+    private Label valueObject;
     @FXML
-    private Button buttonCancel;
+    private Slider sliderVelocity;
 
     // property listeners
-    private ChangeListener<Tone> toneChangeListener = new ChangeListener<Tone>() {
+    private ChangeListener<Tone> selectedToneChangeListener = new ChangeListener<>() {
         @Override
         public void changed(ObservableValue<? extends Tone> observable, Tone oldValue, Tone newValue) {
+            System.out.println("selected tone changed");
+            onCancel();
+            if (newValue != null) {
+                setCurrentTone(newValue);
+            }
+        }
+    };
+
+    private ListChangeListener<Tone> tonesChangeListener = new ListChangeListener<>(){
+        @Override
+        public void onChanged(Change<? extends Tone> c) {
+            System.out.println("tones changed");
+            buttonDelete.setDisable(tone.get() == null || !tones.contains(tone.get()));
+        }
+    };
+
+    private ChangeListener<Tone> toneChangeListener = new ChangeListener<>() {
+        @Override
+        public void changed(ObservableValue<? extends Tone> observable, Tone oldValue, Tone newValue) {
+            System.out.println("tone changed");
             flowPaneTone.setDisable(newValue == null);
+            buttonDelete.setDisable(newValue == null);
+            buttonSave.setDisable(newValue == null || newValue.getNote() == null);
+            toneSnapshotChangeListener.changed(toneSnapshot, null, toneSnapshot.get());
+            if (newValue != null) {
+                valueObject.setText(newValue.toString());
+            } else {
+                valueObject.setText("null");
+            }
         }
     };
 
-    private ChangeListener<Tone> toneSnapshotChangeListener = new ChangeListener<Tone>() {
-        @Override
-        public void changed(ObservableValue<? extends Tone> observable, Tone oldValue, Tone newValue) {
-            buttonCancel.setDisable(newValue == null);
-        }
-    };
-
-    private ChangeListener<Note> noteChangeListener = new ChangeListener<Note>() {
+    private ChangeListener<Note> noteChangeListener = new ChangeListener<>() {
         @Override
         public void changed(ObservableValue<? extends Note> observable, Note oldValue, Note newValue) {
+            System.out.println("note changed");
             if (newValue == null) {
                 valueFrequency.setText("-");
             } else {
                 valueFrequency.setText(Double.toString(newValue.getFrequency()));
             }
+            toneChangeListener.changed(tone, null, tone.get());
+        }
+    };
+
+    private ChangeListener<Tone> toneSnapshotChangeListener = new ChangeListener<>() {
+        @Override
+        public void changed(ObservableValue<? extends Tone> observable, Tone oldValue, Tone newValue) {
+            System.out.println("tone snapshot changed");
+            buttonDelete.setDisable(tone.get() == null || !tones.contains(tone.get()));
+            buttonCancel.setDisable(
+                newValue == null ||
+                (newValue == null || tone.get() == null) ||
+                (newValue != null && tone.get() != null && newValue.getNote() == tone.get().getNote() && newValue.getVelocity() == tone.get().getVelocity())
+            );
         }
     };
 
     // button actions
+    /**
+     * load selected tone from tones list.
+     */
+    public void onLoad() {
+        // setup loaded tone
+        this.setCurrentTone(this.listViewTones.getSelectionModel().getSelectedItem());
+    }
+
+    /**
+     * create new tone.
+     */
     public void onNew() {
-        // unbind old bindings
-        this.unbind();
-
-        // new empty tone
-        this.tone.set(null);
-        this.tone.set(new Tone());
-
-        // create empty snapshot
-        this.createToneSnapshot();
-
-        // note listener
-        this.tone.get().noteProperty().addListener(noteChangeListener);
-        // create new bindings
-        this.bind();
+        // setup empty tone
+        this.setCurrentTone(new Tone());
     }
 
+    /**
+     * delete currently selected tone.
+     */
+    public void onDelete() {
+        // remove tone from list
+        this.tones.remove(this.tone.get());
+        // set current tone to null
+        this.setCurrentTone(this.listViewTones.getSelectionModel().getSelectedItem());
+    }
+
+    /**
+     * discard recent changes (since last save / load).
+     */
     public void onCancel() {
-        // load old snapshot
+        // load last saved state
         this.loadToneSnapshot();
-        // create new bindings
-        this.bind();
     }
 
+    /**
+     * save current values. adds a new tone if not already exists.
+     */
     public void onSave() {
         // save current state
         this.createToneSnapshot();
-
         // check if tone is already in list
         var index = this.tones.indexOf(this.tone.get());
         if (index == -1) {
@@ -116,23 +173,13 @@ public class MainController extends AbstractController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // tones list
+        // tones
         this.tones = new SimpleListProperty<>(FXCollections.observableArrayList());
+        this.tones.addListener(this.tonesChangeListener);
+        // tones list
         this.listViewTones.setCellFactory(new Tone().getCellFactory());
         this.listViewTones.itemsProperty().bindBidirectional(this.tones);
-
-        // tone
-        this.tone = new SimpleObjectProperty<>(new Tone());
-        this.tone.addListener(this.toneChangeListener);
-        // trigger listener
-        this.toneChangeListener.changed(this.tone, null, null);
-
-        // snapshot
-        this.toneSnapshot = new SimpleObjectProperty<>();
-        this.createToneSnapshot();
-        this.toneSnapshot.addListener(this.toneSnapshotChangeListener);
-        // trigger listener
-        this.toneSnapshotChangeListener.changed(this.toneSnapshot, null, null);
+        this.listViewTones.getSelectionModel().selectedItemProperty().addListener(this.selectedToneChangeListener);
 
         // combo box
         // https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ComboBox.html
@@ -140,8 +187,26 @@ public class MainController extends AbstractController {
         this.comboBoxNote.setItems(this.getNotes());
         this.comboBoxNote.setButtonCell(cellFactory.call(null));
         this.comboBoxNote.setCellFactory(cellFactory);
+
+        // tone
+        this.tone = new SimpleObjectProperty<>();
+        this.tone.addListener(this.toneChangeListener);
+
+        // tone snapshot
+        this.toneSnapshot = new SimpleObjectProperty<>();
+        this.toneSnapshot.addListener(this.toneSnapshotChangeListener);
+
+        // trigger listner
+        this.selectedToneChangeListener.changed(this.listViewTones.getSelectionModel().selectedItemProperty(), null, this.listViewTones.getSelectionModel().getSelectedItem());
+        this.toneChangeListener.changed(this.tone, null, this.tone.get());
+        this.toneSnapshotChangeListener.changed(this.toneSnapshot, null, this.toneSnapshot.get());
     }
 
+    /**
+     * get observable list of notes from the values of the PianoNote enum.
+     *
+     * @return observable list of piano notes
+     */
     private ObservableList<Note> getNotes() {
         // create list of notes from piano notes
         return FXCollections.observableArrayList(
@@ -153,6 +218,30 @@ public class MainController extends AbstractController {
             }).collect(Collectors.toList()));
     }
 
+    /**
+     * set up the new currently displayed tone
+     * @param tone
+     */
+    private void setCurrentTone(Tone tone) {
+        // clear old bindings (old tone)
+        this.unbind();
+        // get selected item
+        this.tone.set(tone);
+        if (tone != null) {
+            // add listener to new tone
+            this.tone.get().noteProperty().addListener(this.noteChangeListener);
+            // trigger note changed
+            this.noteChangeListener.changed(this.tone.get().noteProperty(), null, this.tone.get().getNote());
+        }
+        // create snapshot of new tone
+        this.createToneSnapshot();
+        // create new bindings (new tone)
+        this.bind();
+    }
+
+    /**
+     * bind bidirectional property values
+     */
     private void bind() {
         if (this.tone.get() != null) {
             // note binding
@@ -162,6 +251,9 @@ public class MainController extends AbstractController {
         }
     }
 
+    /**
+     * unbind bidirectional property values
+     */
     private void unbind() {
         if (this.tone.get() != null) {
             // note binding
@@ -186,12 +278,12 @@ public class MainController extends AbstractController {
      * load values from snapshot to current tone.
      */
     private void loadToneSnapshot() {
-        if (this.toneSnapshot.get() != null) {
+        if (this.tone.get() != null && this.toneSnapshot.get() != null) {
             this.tone.get().setNote(this.toneSnapshot.get().getNote());
             this.tone.get().setVelocity(this.toneSnapshot.get().getVelocity());
         } else {
-            this.tone.get().setNote(null);
-            this.tone.get().setVelocity(Tone.DEFAULT_VELOCITY);
+            this.tone.set(null);
         }
+        this.toneSnapshotChangeListener.changed(this.toneSnapshot, null, this.toneSnapshot.get());
     }
 }

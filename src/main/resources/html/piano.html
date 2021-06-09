@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .keyboard {
+            display: flex;
+        }
+
+        .key {
+            border: 1px solid black;
+            width: 60px;
+            height: 300px;
+            display: flex;
+        }
+
+        .pressed {
+            background-color: lightgrey;
+            border-color: dimgrey;
+        }
+
+        .sharp {
+            color: white;
+            background-color: black;
+            width: 40px;
+            height: 180px;
+            position: relative;
+            left: 40px;
+        }
+
+        .sharp.pressed {
+            background-color: dimgrey;
+            border-color: dimgrey;
+        }
+
+        .note {
+            top: 260px;
+        }
+
+        .sharp .note {
+            top: 0px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="keyboard">
+        <div class="key">
+            C
+            <div class="key sharp">C#</div>
+        </div>
+        <div class="key">
+            D
+            <div class="key sharp pressed">D#</div>
+        </div>
+        <div class="key">E</div>
+        <div class="key">
+            F
+            <div class="key sharp">F#</div>
+        </div>
+        <div class="key pressed">
+            G
+            <div class="key sharp">G#</div>
+        </div>
+        <div class="key">
+            A
+            <div class="key sharp">A#</div>
+        </div>
+        <div class="key">B</div>
+    </div>
+</body>
+
+</html>

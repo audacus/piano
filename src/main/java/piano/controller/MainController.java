@@ -5,6 +5,8 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -13,19 +15,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.FlowPane;
 import javafx.util.Callback;
 import piano.data.PianoNote;
 import piano.model.Note;
 import piano.model.Tone;
 
-public class MainController extends AbstractController {
+public class MainController extends ViewController {
 
     private SimpleListProperty<Tone> tones;
     private SimpleObjectProperty<Tone> tone;
@@ -57,7 +62,28 @@ public class MainController extends AbstractController {
         @Override
         public void changed(ObservableValue<? extends Tone> observable, Tone oldValue, Tone newValue) {
             System.out.println("selected tone changed");
-            onCancel();
+            // check if has unsaved changes
+            if (
+                tone.get() != null &&
+                !tone.get().equals(toneSnapshot.get())
+            ) {
+                // ask if the current changes should be
+                var confirmation = new Alert(AlertType.CONFIRMATION);
+                var buttonTypeSave = new ButtonType("save");
+                var buttonTypeDiscard = new ButtonType("discard changes");
+                confirmation.setTitle("warning");
+                confirmation.setHeaderText("unsaved changes");
+                confirmation.setContentText("do you want to save your current changes?");
+                confirmation.getButtonTypes().setAll(buttonTypeSave, buttonTypeDiscard);
+
+                var result = confirmation.showAndWait();
+                if (result.get() == buttonTypeSave) {
+                    onSave();
+                }
+                else if (result.get() == buttonTypeDiscard) {
+                    onCancel();
+                }
+            }
             if (newValue != null) {
                 setCurrentTone(newValue);
             }
@@ -79,7 +105,9 @@ public class MainController extends AbstractController {
             flowPaneTone.setDisable(newValue == null);
             buttonDelete.setDisable(newValue == null);
             buttonSave.setDisable(newValue == null || newValue.getNote() == null);
+
             toneSnapshotChangeListener.changed(toneSnapshot, null, toneSnapshot.get());
+
             if (newValue != null) {
                 valueObject.setText(newValue.toString());
             } else {
@@ -97,6 +125,16 @@ public class MainController extends AbstractController {
             } else {
                 valueFrequency.setText(Double.toString(newValue.getFrequency()));
             }
+            // if note was changed -> tone was changed
+            toneChangeListener.changed(tone, null, tone.get());
+        }
+    };
+
+    private InvalidationListener velocityChangeListener = new InvalidationListener(){
+        @Override
+        public void invalidated(Observable observable) {
+            System.out.println("velocity changed");
+            // if velocity was changed -> tone was changed
             toneChangeListener.changed(tone, null, tone.get());
         }
     };
@@ -108,8 +146,8 @@ public class MainController extends AbstractController {
             buttonDelete.setDisable(tone.get() == null || !tones.contains(tone.get()));
             buttonCancel.setDisable(
                 newValue == null ||
-                (newValue == null || tone.get() == null) ||
-                (newValue != null && tone.get() != null && newValue.getNote() == tone.get().getNote() && newValue.getVelocity() == tone.get().getVelocity())
+                tone.get() == null ||
+                (newValue != null && tone.get() != null && newValue.equals(tone.get()))
             );
         }
     };
@@ -227,12 +265,16 @@ public class MainController extends AbstractController {
         this.unbind();
         // get selected item
         this.tone.set(tone);
+
         if (tone != null) {
-            // add listener to new tone
+            // add field change listeners to new tone
             this.tone.get().noteProperty().addListener(this.noteChangeListener);
-            // trigger note changed
+            this.tone.get().velocityProperty().addListener(this.velocityChangeListener);
+            // trigger change listener
             this.noteChangeListener.changed(this.tone.get().noteProperty(), null, this.tone.get().getNote());
+            this.velocityChangeListener.invalidated(this.tone.get().velocityProperty());
         }
+
         // create snapshot of new tone
         this.createToneSnapshot();
         // create new bindings (new tone)

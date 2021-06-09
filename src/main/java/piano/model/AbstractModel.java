@@ -1,15 +1,17 @@
 package piano.model;
 
-import javafx.beans.property.Property;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
 
 public abstract class AbstractModel {
 
-    public abstract Property<?> getDisplayProperty();
+    public abstract String getDisplayText();
 
     public abstract AbstractModel getCopy();
+
+    @Override
+    public abstract boolean equals(Object obj);
 
     public <T extends AbstractModel> Callback<ListView<T>, ListCell<T>> getCellFactory() {
         return new Callback<ListView<T>,ListCell<T>>(){
@@ -24,7 +26,7 @@ public abstract class AbstractModel {
                         if (empty || item == null) {
                             this.setText(null);
                         } else {
-                            this.setText(String.valueOf(item.getDisplayProperty().getValue()));
+                            this.setText(item.getDisplayText());
                         }
                     }
                 };

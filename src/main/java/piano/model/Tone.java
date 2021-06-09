@@ -1,6 +1,5 @@
 package piano.model;
 
-import javafx.beans.property.Property;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
@@ -42,8 +41,8 @@ public class Tone extends AbstractModel {
     }
 
     @Override
-    public Property<String> getDisplayProperty() {
-        return this.getNote().getDisplayProperty();
+    public String getDisplayText() {
+        return this.getNote().getDisplayText();
     }
 
     @Override
@@ -52,5 +51,16 @@ public class Tone extends AbstractModel {
         tone.setNote(this.getNote());
         tone.setVelocity(this.getVelocity());
         return tone;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Tone) {
+            var compare = (Tone) obj;
+            return
+                this.getNote() == compare.getNote() &&
+                this.getVelocity() == compare.getVelocity();
+        }
+        return false;
     }
 }

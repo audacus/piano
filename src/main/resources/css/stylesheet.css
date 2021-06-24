@@ -1,0 +1,95 @@
+
+html {
+    font-size: 50%;
+}
+
+body {
+    margin: 0;
+}
+
+#keyboard {
+    margin: 0;
+    padding: 0;
+    font-size: 2rem;
+}
+
+.key {
+    z-index: 1;
+    position: relative;
+    list-style: none;
+    float: left;
+    width: 6rem;
+    height: 27rem;
+    /* border */
+    box-shadow:
+        2px 0 0 0 black,
+        0 2px 0 0 black,
+        2px 2px 0 0 black,
+        2px 0 0 0 black inset,
+        0 2px 0 0 black inset;
+}
+
+.pressed {
+    z-index: 2;
+    background-color: lightgrey;
+    color: dimgrey;
+    /* border */
+    box-shadow:
+        2px 0 0 0 dimgrey,
+        0 2px 0 0 dimgrey,
+        2px 2px 0 0 dimgrey,
+        2px 0 0 0 dimgrey inset,
+        0 2px 0 0 dimgrey inset;
+}
+
+.disabled {
+    z-index: 0;
+    color: lightgrey;
+    /* border */
+    box-shadow:
+        2px 0 0 0 lightgrey,
+        0 2px 0 0 lightgrey,
+        2px 2px 0 0 lightgrey,
+        2px 0 0 0 lightgrey inset,
+        0 2px 0 0 lightgrey inset;
+}
+
+.disabled.pressed {
+    background-color: whitesmoke;
+}
+
+.sharp {
+    z-index: 3;
+    width: 4rem;
+    height: 18rem;
+    margin-left: -2rem;
+    margin-right: -2rem;
+    background-color: black;
+}
+
+.sharp.pressed {
+    background-color: dimgrey;
+}
+
+.sharp.disabled {
+    background-color: lightgrey;
+}
+.note {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    bottom: 5.5rem;
+    opacity: 0.3;
+}
+
+.button {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-style: italic;
+    bottom: 0.1rem;
+}
+
+.sharp .button {
+    color: white;
+}

@@ -1,11 +1,12 @@
 package piano;
 
 import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import piano.controller.MainController;
+import piano.controller.PianoController;
 
 public class PianoApp extends Application {
 
@@ -26,11 +27,12 @@ public class PianoApp extends Application {
 
     public void showMainView() {
         try {
-            var mainController = new MainController();
+            // var mainController = new MainController();
+            var pianoController = new PianoController();
             var loader = new FXMLLoader();
 
-            // load main view
-            loader.setLocation(mainController.getView());
+            // load view
+            loader.setLocation(pianoController.getView());
 
             // Show the scene containing the root layout.
             var scene = new Scene(loader.load());

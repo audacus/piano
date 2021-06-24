@@ -8,7 +8,7 @@ public class Piano {
 
 	public static void main(String[] args) {
 		try {
-			Midi.getChannel();
+			Midi.getChannels();
 		} catch (MidiUnavailableException e) {
 			e.printStackTrace();
 		}

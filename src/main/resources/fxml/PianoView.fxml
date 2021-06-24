@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.web.WebView?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="piano.controller.PianoController">
+   <center>
+      <WebView fx:id="webView" maxHeight="-1.0" maxWidth="-1.0" minHeight="300.0" minWidth="600.0" prefHeight="-1.0" prefWidth="-1.0" BorderPane.alignment="CENTER" />
+   </center>
+   <bottom>
+      <GridPane hgap="5.0" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" />
+            <ColumnConstraints fillWidth="false" hgrow="SOMETIMES" maxWidth="-Infinity" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" />
+            <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="-Infinity" />
+            <ColumnConstraints hgrow="SOMETIMES" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+          <Button fx:id="buttonOctaveDecrease" mnemonicParsing="false" onAction="#onOctaveDecrease" text="-" GridPane.columnIndex="2" />
+            <Button fx:id="buttonOctaveIncrease" mnemonicParsing="false" onAction="#onOctaveIncrease" text="+" GridPane.columnIndex="3" />
+            <Label text="octave :" />
+            <Label fx:id="valueOctave" text="-" GridPane.columnIndex="1" />
+            <Button fx:id="buttonVelocityIncrease" mnemonicParsing="false" onAction="#onVelocityIncrease" text="+" GridPane.columnIndex="6" />
+            <Button fx:id="buttonVelocityDecrease" mnemonicParsing="false" onAction="#onVelocityDecrease" text="-" GridPane.columnIndex="5" />
+            <Label text=": velocity" GridPane.columnIndex="8" />
+            <Label fx:id="valueVelocity" text="-" GridPane.columnIndex="7" />
+         </children>
+      </GridPane>
+   </bottom>
+</BorderPane>

@@ -1,6 +1,6 @@
 package piano.data.midi;
 
-public enum Note {
+public enum PianoNote {
     
     A0(21,"A0"),
     AS0(22,"A#0/Bb0"),
@@ -89,31 +89,35 @@ public enum Note {
     A7(105,"A7"),
     AS7(106,"A#7/Bb7"),
     B7(107,"B7"),
-    C8(108,"C8"),
-    CS8(109,"C#8/Db8"),
-    D8(110,"D8"),
-    DS8(111,"D#8/Eb8"),
-    E8(112,"E8"),
-    F8(113,"F8"),
-    FS8(114,"F#8/Gb8"),
-    G8(115,"G8"),
-    GS8(116,"G#8/Ab8"),
-    A8(117,"A8"),
-    AS8(118,"A#8/Bb8"),
-    B8(119,"B8"),
-    C9(120,"C9"),
-    CS9(121,"C#9/Db9"),
-    D9(122,"D9"),
-    DS9(123,"D#9/Eb9"),
-    E9(124,"E9"),
-    F9(125,"F9"),
-    FS9(126,"F#9/Gb9"),
-    G9(127,"G9");
+    C8(108,"C8")
+    // non standard piano notes
+    // CS8(109,"C#8/Db8"),
+    // D8(110,"D8"),
+    // DS8(111,"D#8/Eb8"),
+    // E8(112,"E8"),
+    // F8(113,"F8"),
+    // FS8(114,"F#8/Gb8"),
+    // G8(115,"G8"),
+    // GS8(116,"G#8/Ab8"),
+    // A8(117,"A8"),
+    // AS8(118,"A#8/Bb8"),
+    // B8(119,"B8"),
+    // C9(120,"C9"),
+    // CS9(121,"C#9/Db9"),
+    // D9(122,"D9"),
+    // DS9(123,"D#9/Eb9"),
+    // E9(124,"E9"),
+    // F9(125,"F9"),
+    // FS9(126,"F#9/Gb9"),
+    // G9(127,"G9")
+    ;
     
     private final int midiNoteNumber;
     private final String noteName;
 
-    private Note(int midiNoteNumber, String noteName) {
+    private OctaveNote octaveNote;
+
+    private PianoNote(int midiNoteNumber, String noteName) {
         this.midiNoteNumber = midiNoteNumber;
         this.noteName = noteName;
     }
@@ -126,7 +130,26 @@ public enum Note {
         return this.noteName;
     }
 
+    public boolean isSharpNote() {
+        return this.getOctaveNote() != null ? this.getOctaveNote().isSharpNote() : false;
+    }
+
     public double getFrequency() {
-        return 440.0 * Math.pow(2.0, (this.midiNoteNumber - 69) / 12.0);
+        return 440.0 * Math.pow(2.0, (this.getMidiNoteNumber() - 69) / 12.0);
+    }
+
+    public int getOctave() {
+        return Math.floorDiv(this.getMidiNoteNumber() - 12, 12);
+    }
+
+    public int getOctaveNoteIndex() {
+        return this.getMidiNoteNumber() % 12;
+    }
+
+    public OctaveNote getOctaveNote() {
+        if (this.octaveNote == null) {
+            this.octaveNote = OctaveNote.getOctaveNoteByIndex(this.getOctaveNoteIndex());
+        }
+        return this.octaveNote;
     }
 }

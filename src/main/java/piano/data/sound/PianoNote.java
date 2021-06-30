@@ -1,4 +1,4 @@
-package piano.data.midi;
+package piano.data.sound;
 
 public enum PianoNote {
     

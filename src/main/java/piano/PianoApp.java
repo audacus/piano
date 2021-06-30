@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import piano.controller.PianoController;
+import piano.controller.ViewController;
 
 public class PianoApp extends Application {
 
@@ -27,17 +28,19 @@ public class PianoApp extends Application {
 
     public void showMainView() {
         try {
-            // var mainController = new MainController();
             var pianoController = new PianoController();
-            var loader = new FXMLLoader();
 
             // load view
+            var loader = new FXMLLoader();
             loader.setLocation(pianoController.getView());
 
-            // Show the scene containing the root layout.
+            // show the scene containing the root layout
             var scene = new Scene(loader.load());
-            primaryStage.setScene(scene);
-            primaryStage.show();
+            this.primaryStage.setScene(scene);
+            this.primaryStage.show();
+
+            // set on window close action
+            this.primaryStage.setOnCloseRequest(((ViewController) loader.getController()).getWindowCloseHandler());
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -2,17 +2,9 @@ package piano;
 
 import javax.sound.midi.MidiUnavailableException;
 
-import piano.sound.Midi;
-
 public class Piano {
 
-	public static void main(String[] args) {
-		try {
-			Midi.getChannels();
-		} catch (MidiUnavailableException e) {
-			e.printStackTrace();
-		}
-
+	public static void main(String[] args) throws MidiUnavailableException, InterruptedException {
 		PianoApp.main(args);
 	}
 }

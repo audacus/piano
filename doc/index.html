@@ -92,20 +92,54 @@ Nun liegen auch zwischen dem Meilenstein <em>e) JavaFX</em> und dem letzten Meil
 <h3>
 <a id="user-content-1-ziele" class="anchor" href="#1-ziele" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1. Ziele</h3>
 <ul>
+<li>Meilensteine auf einen Zeitstrahl legen.</li>
+<li>Zeitliche Übersicht um einen IST-SOLL-Vergleich zu ermöglichen.</li>
+<li>Erste Gedanken machen zu den Aufgaben innerhalb der einzelnen Meilensteine.</li>
+</ul>
+<p>Produkte:</p>
+<ul>
 <li>Gantt-Diagram mit Meilensteinen</li>
 </ul>
 <h3>
 <a id="user-content-2-alternativen--risikoanalyse" class="anchor" href="#2-alternativen--risikoanalyse" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2. Alternativen / Risikoanalyse</h3>
+<p>Alternativ zu einem Zeitplan anhand eines Gantt-Diagrams, gäbe es die Auflistung der Meilensteine und den dazu geschätzten Aufwand. Da so aber die einzelnen Schritte kein "Abgabedatum" haben, wäre es weniger gut nachvollziehbar, ob man noch auf dem richtigen Weg ist und/oder es zeitlich schaffen wird.</p>
+<p>Eine andere Alternative wäre keine Zeitplanung zu haben sondern ohne zeitliche Aufteilung oder Anhaltspunkte auf den Abgabetermin hin zu arbeiten. Bei kleineren Projekten kann diese Methode unnötige administrative Einschränkungen aushebeln, führt aber dazu, dass nur nach besten Wissen und Gewissen auf das Ziel hin gearbeitet wird.</p>
 <h3>
 <a id="user-content-3-entwicklung--test" class="anchor" href="#3-entwicklung--test" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3. Entwicklung / Test</h3>
+<p>Die Umsetzung des Gantt-Diagrams wird mit dem Gratis-Program "GanttProject" gemacht (Webseite <a href="https://www.ganttproject.biz/" rel="nofollow">GanttProject</a>). Ich habe mich für dieses Program entschieden, da ich bereits Erfahrungen damit in anderen Projekten sammeln konnte. Ausserdem erlaubt es das Program den Plan als Bild oder als PDF zu exportieren, was sehr hilfreich ist für die Dokumentation.</p>
+<p>Das Resultat sieht befriedigend aus und erfüllt meine Anforderungen an einen einfachen und übersichtlichen Zeitplan mit den Meilensteinen.</p>
 <h3>
 <a id="user-content-4-planung-nächster-meilenstein" class="anchor" href="#4-planung-n%C3%A4chster-meilenstein" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4. Planung nächster Meilenstein</h3>
+<p>Mit dem bevorstehenden Schritt wechselt es auf die technische Ebene. Für den nächsten Schritt müssen gewisse Informationen über das Projekt vorhanden sein. Dies betrifft konkret den Projekt-Namen und die damit verbundene Programm-Idee.</p>
+<p>Ich habe mich entschieden ein virtuelles Klavier zu erstellen, welches Töne mittels der MIDI-Schnittstelle Töne ausgeben soll, die Java zur Verfügung stellt.</p>
+<p>Aus dieser Idee ergibt sich der Projekt-Name "piano".</p>
 <h2>
 <a id="user-content-b-projekt-setup-test-klasse-git-setup" class="anchor" href="#b-projekt-setup-test-klasse-git-setup" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>b) Projekt-Setup, Test-Klasse, Git-Setup</h2>
+<p>In diesem Schritt werden die Grundsteine für die Umsetzung der Applikation gesetzt. Diese Sachen werden am Anfang aufgesetzt und sollten während der Umsetzung nicht mehr oder nur noch minimal angepasst werden müssen.</p>
 <h3>
 <a id="user-content-1-ziele-1" class="anchor" href="#1-ziele-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>1. Ziele</h3>
+<ul>
+<li>JavaFX-Projekt mittels Maven aufsetzen (<code>pom.xml</code>).</li>
+<li>Projekt-Repository auf dem von der Schule zur Verfügung gestellten GitLab erstellen.</li>
+<li>Dem Dozenten/Ansprechspartner Zugriff zum Repository gewähren.</li>
+<li>Initiale Java-Projekt-Struktur sowie die Dokumentation dem Repository hinzufügen.</li>
+<li>Eine Test-Klasse erstellen um den Einstieg in das Java-Program sicherzustellen.</li>
+</ul>
 <h3>
 <a id="user-content-2-alternativen--risikoanalyse-1" class="anchor" href="#2-alternativen--risikoanalyse-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>2. Alternativen / Risikoanalyse</h3>
+<h4>
+<a id="user-content-porjekt-setup" class="anchor" href="#porjekt-setup" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Porjekt-Setup</h4>
+<p>Anstelle von Maven könnte man auch keinen Dependency-Manager gebrauchen und die benötigten Resourcen (z.B. JavaFX) manuel einbinden und in Java zur Verfügung stellen.</p>
+<p>Dies hat den Nachteil, dass die Abhängigkeiten auf jedem System auf dem das Projekt aufgesetzt wird, auf ein Neues manuel eingerichtet werden müssen. Durch dass diese Abhängigkeiten mittels Maven auf jedem Gerät auf die gleiche Weise verwaltet werden können, finde ich den Gebrauch von Maven die angemessenste Lösung.</p>
+<h4>
+<a id="user-content-git-setup" class="anchor" href="#git-setup" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Git Setup</h4>
+<p>Anstelle vom GitLab der HFTM könnte ich das Projekt auf meinem privaten GitHub aufsetzen. Eine weiter Alternative wäre es, das Git-Repository auf meinem privaten Web-Server zur Verfügung zu stellen.</p>
+<p>Dadurch vermischt sich aber das Private und das Studium, was ich an dieser Stelle verhindern will. Darum setze ich das Git-Repository auf dem GitLab der HFTM auf.</p>
+<h4>
+<a id="user-content-test-klasse" class="anchor" href="#test-klasse" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Test-Klasse</h4>
+<p>Die Test-Klasse kann für verschiedene Dinge genutzt werden. Man kann während der Umsetzung des Projekts immer wieder die Test-Klasse erweitern um die neue Funktionailtät des Programs zu testen und vereinfacht zu veranschaulichen.</p>
+<p>Da meine Applikation hauptsächlich von den Funktionalität der Benutzerobefläche bestimmt wird, sehe ich das Aufsetzen einer solchen Test-Klasse nicht als zwingend. Es würde viel zusätzlichen Aufwand mit sich bringen um jegliche Funktionen zusätzlich in einer solchen Test-Klasse zum Testen einzubinden.</p>
+<p>Ich entscheide mich darum gegen eine solche Test-Klasse und werde diese nur nutzen um am Anfang der Projekt-Initialisierung sicherzustellen, ob ich die Java-Applikation wie gewünscht starten kann.</p>
 <h3>
 <a id="user-content-3-entwicklung--test-1" class="anchor" href="#3-entwicklung--test-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3. Entwicklung / Test</h3>
 <h3>

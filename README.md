@@ -26,15 +26,58 @@ Nun liegen auch zwischen dem Meilenstein _e) JavaFX_ und dem letzten Meilenstein
 ![Gantt Diagramm](gantt/piano-gantt.png)
 
 ### 1. Ziele
+* Meilensteine auf einen Zeitstrahl legen.
+* Zeitliche Übersicht um einen IST-SOLL-Vergleich zu ermöglichen.
+* Erste Gedanken machen zu den Aufgaben innerhalb der einzelnen Meilensteine.
+
+Produkte:
 * Gantt-Diagram mit Meilensteinen
 
 ### 2. Alternativen / Risikoanalyse
+Alternativ zu einem Zeitplan anhand eines Gantt-Diagrams, gäbe es die Auflistung der Meilensteine und den dazu geschätzten Aufwand. Da so aber die einzelnen Schritte kein "Abgabedatum" haben, wäre es weniger gut nachvollziehbar, ob man noch auf dem richtigen Weg ist und/oder es zeitlich schaffen wird.
+
+Eine andere Alternative wäre keine Zeitplanung zu haben sondern ohne zeitliche Aufteilung oder Anhaltspunkte auf den Abgabetermin hin zu arbeiten. Bei kleineren Projekten kann diese Methode unnötige administrative Einschränkungen aushebeln, führt aber dazu, dass nur nach besten Wissen und Gewissen auf das Ziel hin gearbeitet wird.
+
 ### 3. Entwicklung / Test
+Die Umsetzung des Gantt-Diagrams wird mit dem Gratis-Program "GanttProject" gemacht (Webseite [GanttProject](https://www.ganttproject.biz/)). Ich habe mich für dieses Program entschieden, da ich bereits Erfahrungen damit in anderen Projekten sammeln konnte. Ausserdem erlaubt es das Program den Plan als Bild oder als PDF zu exportieren, was sehr hilfreich ist für die Dokumentation.
+
+Das Resultat sieht befriedigend aus und erfüllt meine Anforderungen an einen einfachen und übersichtlichen Zeitplan mit den Meilensteinen.
+
 ### 4. Planung nächster Meilenstein
+Mit dem bevorstehenden Schritt wechselt es auf die technische Ebene. Für den nächsten Schritt müssen gewisse Informationen über das Projekt vorhanden sein. Dies betrifft konkret den Projekt-Namen und die damit verbundene Programm-Idee.
+
+Ich habe mich entschieden ein virtuelles Klavier zu erstellen, welches Töne mittels der MIDI-Schnittstelle Töne ausgeben soll, die Java zur Verfügung stellt.
+
+Aus dieser Idee ergibt sich der Projekt-Name "piano".
 
 ## b) Projekt-Setup, Test-Klasse, Git-Setup
+In diesem Schritt werden die Grundsteine für die Umsetzung der Applikation gesetzt. Diese Sachen werden am Anfang aufgesetzt und sollten während der Umsetzung nicht mehr oder nur noch minimal angepasst werden müssen.
+
 ### 1. Ziele
+* JavaFX-Projekt mittels Maven aufsetzen (`pom.xml`).
+* Projekt-Repository auf dem von der Schule zur Verfügung gestellten GitLab erstellen.
+* Dem Dozenten/Ansprechspartner Zugriff zum Repository gewähren.
+* Initiale Java-Projekt-Struktur sowie die Dokumentation dem Repository hinzufügen.
+* Eine Test-Klasse erstellen um den Einstieg in das Java-Program sicherzustellen.
+
 ### 2. Alternativen / Risikoanalyse
+#### Porjekt-Setup
+Anstelle von Maven könnte man auch keinen Dependency-Manager gebrauchen und die benötigten Resourcen (z.B. JavaFX) manuel einbinden und in Java zur Verfügung stellen.
+
+Dies hat den Nachteil, dass die Abhängigkeiten auf jedem System auf dem das Projekt aufgesetzt wird, auf ein Neues manuel eingerichtet werden müssen. Durch dass diese Abhängigkeiten mittels Maven auf jedem Gerät auf die gleiche Weise verwaltet werden können, finde ich den Gebrauch von Maven die angemessenste Lösung.
+
+#### Git Setup
+Anstelle vom GitLab der HFTM könnte ich das Projekt auf meinem privaten GitHub aufsetzen. Eine weiter Alternative wäre es, das Git-Repository auf meinem privaten Web-Server zur Verfügung zu stellen.
+
+Dadurch vermischt sich aber das Private und das Studium, was ich an dieser Stelle verhindern will. Darum setze ich das Git-Repository auf dem GitLab der HFTM auf.
+
+#### Test-Klasse
+Die Test-Klasse kann für verschiedene Dinge genutzt werden. Man kann während der Umsetzung des Projekts immer wieder die Test-Klasse erweitern um die neue Funktionailtät des Programs zu testen und vereinfacht zu veranschaulichen.
+
+Da meine Applikation hauptsächlich von den Funktionalität der Benutzerobefläche bestimmt wird, sehe ich das Aufsetzen einer solchen Test-Klasse nicht als zwingend. Es würde viel zusätzlichen Aufwand mit sich bringen um jegliche Funktionen zusätzlich in einer solchen Test-Klasse zum Testen einzubinden.
+
+Ich entscheide mich darum gegen eine solche Test-Klasse und werde diese nur nutzen um am Anfang der Projekt-Initialisierung sicherzustellen, ob ich die Java-Applikation wie gewünscht starten kann.
+
 ### 3. Entwicklung / Test
 ### 4. Planung nächster Meilenstein
 

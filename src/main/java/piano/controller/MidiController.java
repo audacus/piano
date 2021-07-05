@@ -6,18 +6,17 @@ import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Synthesizer;
 
-/**
- * java sound: https://docs.oracle.com/javase/tutorial/sound/index.html
- * sequencers: https://docs.oracle.com/javase/tutorial/sound/MIDI-seq-intro.html
- * stackoverflow simple piano: https://codereview.stackexchange.com/questions/58439/very-basic-java-piano
- * stackoverflow violin tuner: https://codereview.stackexchange.com/questions/57502/using-sounds-in-java/57516#57516
- */
 public class MidiController {
 
     public static final int PERCUSSION_CHANNEL = 9;
+
     public static final int DEFAULT_VELOCITY = 96;
     public static final int MIN_VELOCITY = 0;
     public static final int MAX_VELOCITY = 127;
+
+    public static final int CONTROLLER_SUSTAIN = 64;
+    public static final int SUSTAIN_OFF = 0;
+    public static final int SUSTAIN_ON = 127;
 
     private static Synthesizer synthesizer;
     private static MidiChannel[] channels;

@@ -307,17 +307,18 @@ public class PianoController extends ViewController {
 
     // other methods
     private void sustainOn() {
-        this.midiChannel.controlChange(64, 127);
+        this.midiChannel.controlChange(MidiController.CONTROLLER_SUSTAIN, MidiController.SUSTAIN_ON);
     }
 
     private void sustainOff() {
-        this.midiChannel.controlChange(64, 0);
+        this.midiChannel.controlChange(MidiController.CONTROLLER_SUSTAIN, MidiController.SUSTAIN_OFF);
     }
     
     private void pressPianoButton(PianoButton pianoButton) {
         pianoButton.setIsPressed(true);
         var noteIndex = pianoButton.getNoteIndex();
         var pianoNote = currentKeyboardNotes[noteIndex];
+
         // check if there is a note for this instrument
         if (pianoNote == null) return;
 
@@ -337,6 +338,7 @@ public class PianoController extends ViewController {
         pianoButton.setIsPressed(false);
         var noteIndex = pianoButton.getNoteIndex();
         var pianoNote = currentKeyboardNotes[noteIndex];
+
         // check if there is a note for this instrument
         if (pianoNote == null) return;
 
@@ -467,7 +469,7 @@ public class PianoController extends ViewController {
             this.put(KeyCode.F,         new PianoButton(KeyCode.F,          "F", 5, false));
             this.put(KeyCode.T,         new PianoButton(KeyCode.T,          "T", 6, false));
             this.put(KeyCode.G,         new PianoButton(KeyCode.G,          "G", 7, false));
-            this.put(KeyCode.Y,         new PianoButton(KeyCode.Y,          "Y", 8, false));
+            this.put(KeyCode.Y,         new PianoButton(KeyCode.Y,          "Z", 8, false));
             this.put(KeyCode.H,         new PianoButton(KeyCode.H,          "H", 9, false));
             this.put(KeyCode.U,         new PianoButton(KeyCode.U,          "U", 10, false));
             this.put(KeyCode.J,         new PianoButton(KeyCode.J,          "J", 11, false));
@@ -508,6 +510,7 @@ public class PianoController extends ViewController {
                 };
             }
         };
+
         this.comboBoxProgram.setItems(FXCollections.observableArrayList(instruments));
         this.comboBoxProgram.setButtonCell(cellFactory.call(null));
         this.comboBoxProgram.setCellFactory(cellFactory);

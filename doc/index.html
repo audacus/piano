@@ -73,8 +73,19 @@
               <article class="markdown-body entry-content" itemprop="text" id="grip-content">
                 <h1>
 <a id="user-content-piano" class="anchor" href="#piano" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>piano</h1>
+<p>GitLab: <a href="https://dev.hftm.ch:4430/david.burkhart/piano" rel="nofollow">https://dev.hftm.ch:4430/david.burkhart/piano</a></p>
+<p>Projekt aufsetzen:</p>
+<pre><code>git clone https://dev.hftm.ch:4430/david.burkhart/piano.git
+cd piano
+mvn clean
+mvn compile
+mvn package
+</code></pre>
+<p>Projekt starten:</p>
+<pre><code>java -jar target/piano-0.1.jar
+</code></pre>
 <h2>
-<a id="user-content-inhaltsverzeichnis" class="anchor" href="#inhaltsverzeichnis" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Inhaltsverzeichnis</h2>
+<a id="user-content-inhaltsverzeichnis-dokumentation" class="anchor" href="#inhaltsverzeichnis-dokumentation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Inhaltsverzeichnis Dokumentation</h2>
 <p>a) <a href="#a-zeit-planung">Zeit-Planung</a></p>
 <p>b) <a href="#b-projekt-setup-test-klasse-git-setup">Projekt-Setup, Test-Klasse, Git-Setup</a></p>
 <p>c) <a href="#c-modell-klassen">Modell-Klassen</a></p>
@@ -106,7 +117,7 @@ Nun liegen auch zwischen dem Meilenstein <em>e) JavaFX</em> und dem letzten Meil
 <p>Eine andere Alternative wäre keine Zeitplanung zu haben sondern ohne zeitliche Aufteilung oder Anhaltspunkte auf den Abgabetermin hin zu arbeiten. Bei kleineren Projekten kann diese Methode unnötige administrative Einschränkungen aushebeln, führt aber dazu, dass nur nach besten Wissen und Gewissen auf das Ziel hin gearbeitet wird.</p>
 <h3>
 <a id="user-content-3-entwicklung--test" class="anchor" href="#3-entwicklung--test" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3. Entwicklung / Test</h3>
-<p>Die Umsetzung des Gantt-Diagrams wird mit dem Gratis-Program "GanttProject" gemacht (Webseite <a href="https://www.ganttproject.biz/" rel="nofollow">GanttProject</a>). Ich habe mich für dieses Program entschieden, da ich bereits Erfahrungen damit in anderen Projekten sammeln konnte. Ausserdem erlaubt es das Program den Plan als Bild oder als PDF zu exportieren, was sehr hilfreich ist für die Dokumentation.</p>
+<p>Die Umsetzung des Gantt-Diagrams wird mit dem Gratis-Program "GanttProject" gemacht. Ich habe mich für dieses Program entschieden, da ich bereits Erfahrungen damit in anderen Projekten sammeln konnte. Ausserdem erlaubt es das Program den Plan als Bild oder als PDF zu exportieren, was sehr hilfreich ist für die Dokumentation.</p>
 <p>Das Resultat sieht befriedigend aus und erfüllt meine Anforderungen an einen einfachen und übersichtlichen Zeitplan mit den Meilensteinen.</p>
 <h3>
 <a id="user-content-4-planung-nächster-meilenstein" class="anchor" href="#4-planung-n%C3%A4chster-meilenstein" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4. Planung nächster Meilenstein</h3>
@@ -142,8 +153,12 @@ Nun liegen auch zwischen dem Meilenstein <em>e) JavaFX</em> und dem letzten Meil
 <p>Ich entscheide mich darum gegen eine solche Test-Klasse und werde diese nur nutzen um am Anfang der Projekt-Initialisierung sicherzustellen, ob ich die Java-Applikation wie gewünscht starten kann.</p>
 <h3>
 <a id="user-content-3-entwicklung--test-1" class="anchor" href="#3-entwicklung--test-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>3. Entwicklung / Test</h3>
+<p>Das Git-Setup war das Erste, dass ich gemacht habe, als ich mit dem Projekt begann. Der Grund dafür war, dass ich von Anfang an auch die Dokumentation auf dem Git-Repository haben wollte. Somit erstellte ich ein leeres Git-Repository und startete mit dem Aufsetzen der Dokumentation.
+Für das Projekt-Setup nehme ich ein bereits gemachtes Maven-JavaFX-Projekt von der Schule als Vorlage (<code>pom.xml</code>, Ordnerstruktur, ...) als Vorlage. Ich starte die Applikation und schaue ob die JavaFX-Komponenten geladen werden können und angezeigt werden. Nach einem erfolgreichen Start, hat die Test-Klasse keinen weiteren Nutzen mehr.</p>
 <h3>
 <a id="user-content-4-planung-nächster-meilenstein-1" class="anchor" href="#4-planung-n%C3%A4chster-meilenstein-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>4. Planung nächster Meilenstein</h3>
+<p>Im nächsten Schritt werden die verschiedenen Modell-Klassen erstellt, sprich, die verschiedenen Entitäten (Dinge) des Programms mit Java-Klassen und/oder Enums abgebildet.</p>
+<p>Da ich die Dokumentation nicht während der Umsetzung nachgeführt habe, endet die Dokumentation hier. Meine Prioritäten bezüglich dem Projekt waren sehr selbstlos. Dadurch leidete mein eigenes Projekt. Ich hoffe trotzdem, dass beim Klavier-Spielen am PC Freude aufkommen kann.</p>
 <h2>
 <a id="user-content-c-modell-klassen" class="anchor" href="#c-modell-klassen" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>c) Modell-Klassen</h2>
 <h3>

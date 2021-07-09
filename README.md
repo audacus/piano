@@ -1,6 +1,22 @@
 # piano
 
-## Inhaltsverzeichnis
+GitLab: https://dev.hftm.ch:4430/david.burkhart/piano
+
+Projekt aufsetzen:
+```
+git clone https://dev.hftm.ch:4430/david.burkhart/piano.git
+cd piano
+mvn clean
+mvn compile
+mvn package
+```
+
+Projekt starten:
+```
+java -jar target/piano-0.1.jar
+```
+
+## Inhaltsverzeichnis Dokumentation
 
 a) [Zeit-Planung](#a-zeit-planung)
 
@@ -39,7 +55,7 @@ Alternativ zu einem Zeitplan anhand eines Gantt-Diagrams, gäbe es die Auflistun
 Eine andere Alternative wäre keine Zeitplanung zu haben sondern ohne zeitliche Aufteilung oder Anhaltspunkte auf den Abgabetermin hin zu arbeiten. Bei kleineren Projekten kann diese Methode unnötige administrative Einschränkungen aushebeln, führt aber dazu, dass nur nach besten Wissen und Gewissen auf das Ziel hin gearbeitet wird.
 
 ### 3. Entwicklung / Test
-Die Umsetzung des Gantt-Diagrams wird mit dem Gratis-Program "GanttProject" gemacht (Webseite [GanttProject](https://www.ganttproject.biz/)). Ich habe mich für dieses Program entschieden, da ich bereits Erfahrungen damit in anderen Projekten sammeln konnte. Ausserdem erlaubt es das Program den Plan als Bild oder als PDF zu exportieren, was sehr hilfreich ist für die Dokumentation.
+Die Umsetzung des Gantt-Diagrams wird mit dem Gratis-Program "GanttProject" gemacht. Ich habe mich für dieses Program entschieden, da ich bereits Erfahrungen damit in anderen Projekten sammeln konnte. Ausserdem erlaubt es das Program den Plan als Bild oder als PDF zu exportieren, was sehr hilfreich ist für die Dokumentation.
 
 Das Resultat sieht befriedigend aus und erfüllt meine Anforderungen an einen einfachen und übersichtlichen Zeitplan mit den Meilensteinen.
 
@@ -79,7 +95,13 @@ Da meine Applikation hauptsächlich von den Funktionalität der Benutzerobefläc
 Ich entscheide mich darum gegen eine solche Test-Klasse und werde diese nur nutzen um am Anfang der Projekt-Initialisierung sicherzustellen, ob ich die Java-Applikation wie gewünscht starten kann.
 
 ### 3. Entwicklung / Test
+Das Git-Setup war das Erste, dass ich gemacht habe, als ich mit dem Projekt begann. Der Grund dafür war, dass ich von Anfang an auch die Dokumentation auf dem Git-Repository haben wollte. Somit erstellte ich ein leeres Git-Repository und startete mit dem Aufsetzen der Dokumentation.
+Für das Projekt-Setup nehme ich ein bereits gemachtes Maven-JavaFX-Projekt von der Schule als Vorlage (`pom.xml`, Ordnerstruktur, ...) als Vorlage. Ich starte die Applikation und schaue ob die JavaFX-Komponenten geladen werden können und angezeigt werden. Nach einem erfolgreichen Start, hat die Test-Klasse keinen weiteren Nutzen mehr.
+
 ### 4. Planung nächster Meilenstein
+Im nächsten Schritt werden die verschiedenen Modell-Klassen erstellt, sprich, die verschiedenen Entitäten (Dinge) des Programms mit Java-Klassen und/oder Enums abgebildet.
+
+Da ich die Dokumentation nicht während der Umsetzung nachgeführt habe, endet die Dokumentation hier. Meine Prioritäten bezüglich dem Projekt waren sehr selbstlos. Dadurch leidete mein eigenes Projekt. Ich hoffe trotzdem, dass beim Klavier-Spielen am PC Freude aufkommen kann.
 
 ## c) Modell-Klassen
 ### 1. Ziele
